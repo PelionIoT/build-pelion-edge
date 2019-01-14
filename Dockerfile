@@ -52,6 +52,15 @@ COPY ./dash.selections /tmp/
 RUN debconf-set-selections /tmp/dash.selections \
 && dpkg-reconfigure -fnoninteractive dash
 
+# install i386 deps for the nodejs build
+
+RUN dpkg --add-architecture i386 \
+&& apt-get update && apt-get install -y --no-install-recommends \
+		g++-multilib \
+		libssl-dev:i386 \
+		libcrypto++-dev:i386 \
+		zlib1g-dev:i386
+
 ARG user
 ARG group
 ARG uid
