@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		net-tools \
 		locales \
 		debconf-utils \
-		lsb-release
+		lsb-release \
+		file
 
 # install dependencies from Travis
 RUN apt-get update && apt-get install -y --no-install-recommends \
