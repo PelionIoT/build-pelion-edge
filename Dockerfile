@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		emacs-nox \
 		ssh \
 		git \
+		curl \
 		net-tools \
 		locales \
 		debconf-utils
