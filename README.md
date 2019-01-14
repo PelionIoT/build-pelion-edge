@@ -7,7 +7,7 @@
 
 ## Run the docker image
 
-    docker run -it -v $HOME:$HOME wigwag-build-env_${USER}
+    docker run -it -v $HOME:$HOME --name wigwag-build-env_${USER} wigwag-build-env_${USER}
 
 You might also want to run that inside of screen to be able to detach and
 reattach.
