@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		curl \
 		net-tools \
 		locales \
-		debconf-utils
+		debconf-utils \
+		lsb-release
 
 COPY locales.selections /tmp/
 RUN debconf-set-selections < /tmp/locales.selections \
