@@ -14,8 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		file
 
 # install dependencies from Travis
-RUN dpkg --add-architecture i386 \
-&& apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
 		build-essential \
 		chrpath \
 		cpio \
@@ -42,11 +41,7 @@ RUN dpkg --add-architecture i386 \
 		unzip \
 		wget \
 		xterm \
-		zlib1g-dev \
-		g++-multilib \
-		libssl-dev:i386 \
-		libcrypto++-dev:i386 \
-		zlib1g-dev:i386
+		zlib1g-dev
 
 COPY ./locales.selections /tmp/
 RUN debconf-set-selections < /tmp/locales.selections \
