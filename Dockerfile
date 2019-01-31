@@ -1,11 +1,12 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        screen \
+		screen \
 		sudo \
 		emacs-nox \
 		ssh \
 		git \
+		vim \
 		curl \
 		net-tools \
 		locales \
