@@ -42,7 +42,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		unzip \
 		wget \
 		xterm \
-		zlib1g-dev
+		zlib1g-dev \
+		cron \
+		lockfile-progs
 
 COPY ./locales.selections /tmp/
 RUN debconf-set-selections < /tmp/locales.selections \
