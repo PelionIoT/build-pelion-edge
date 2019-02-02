@@ -44,7 +44,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		xterm \
 		zlib1g-dev \
 		cron \
-		lockfile-progs
+		lockfile-progs \
+		software-properties-common
 
 COPY ./locales.selections /tmp/
 RUN debconf-set-selections < /tmp/locales.selections \
