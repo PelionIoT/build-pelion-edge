@@ -27,9 +27,8 @@ reattach.
     ... change enableDistroAnnouncements to 0
     ... save,quit
     $ cd Tyocto/thud/poky
-    # modify recipe Tyocto/thud/METAS/meta-wigwag/recipes-wigwag/mbed-devicejs-bridge/mbed-devicejs-bridge_0.0.1.bb
-        # add "export SSH_AUTH_SOCK"
-    # modify any other recipes with oe_runnpm commands in the same way
+    # add "export SSH_AUTH_SOCK" before any oe_runnpm calls
+    $ find ../METAS/meta-wigwag/recipes-wigwag/ -name "*.bb" | xargs grep -l oe_runnpm | xargs sed -i 's/oe_runnpm/export SSH_AUTH_SOCK; oe_runnpm/g'
     $ echo “1.1.1” > /tmp/BUILDMMU.txt
     $ source oe-init-build-env
     $ bitbake wwrelay-ng-wpackage
