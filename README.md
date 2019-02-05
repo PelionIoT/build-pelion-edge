@@ -33,9 +33,9 @@ These instructions should be run from within the Docker container started in the
         # recipes that use oe_runnpm in the do_compile() function need to be modified to allow usage of your sshagent because some of the dependencies listed in package.json are from private repos.
         # Modify the following recipes found in Tyocto/thud/METAS/meta-wigwag/recipes-wigwag:
         1. mbed-devicejs-bridge/mbed-devicejs-bridge_0.0.1.bb
-        1. devicejs/devicejs_0.0.12.bb b/recipes-wigwag/devicejs/devicejs_0.0.12.bb
-        1. node-hotplug/node-hotplug_1.0.bb b/recipes-wigwag/node-hotplug/node-hotplug_1.0.bb
-        1. wwrelay-utils/wwrelay-utils_1.0.1.bb b/recipes-wigwag/wwrelay-utils/wwrelay-utils_1.0.1.bb
+        1. devicejs/devicejs_0.0.12.bb 
+        1. node-hotplug/node-hotplug_1.0.bb 
+        1. wwrelay-utils/wwrelay-utils_1.0.1.bb 
     echo “1.1.1” > /tmp/BUILDMMU.txt
     source oe-init-build-env
 
