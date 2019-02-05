@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		locales \
 		debconf-utils \
 		lsb-release \
+		lockfile-progs \
 		file
 
 # install dependencies from Travis
