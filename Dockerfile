@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		debconf-utils \
 		lsb-release \
 		lockfile-progs \
+		pxz \
 		file
 
 # install dependencies from Travis
