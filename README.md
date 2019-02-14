@@ -29,13 +29,7 @@ These instructions should be run from within the Docker container started in the
     ... change distrobutionRoot to ${HOME}/workspace/wigwag-build-env/build/distro
     ... save,quit
     cd Tyocto/thud/poky
-    # add "export SSH_AUTH_SOCK" on its own line somewhere near the top of recipes that use oe_runnpm
-        # recipes that use oe_runnpm in the do_compile() function need to be modified to allow usage of your sshagent because some of the dependencies listed in package.json are from private repos.
-        # Modify the following recipes found in Tyocto/thud/METAS/meta-wigwag/recipes-wigwag:
-        1. mbed-devicejs-bridge/mbed-devicejs-bridge_0.0.1.bb
-        1. devicejs/devicejs_0.0.12.bb 
-        1. node-hotplug/node-hotplug_1.0.bb 
-        1. wwrelay-utils/wwrelay-utils_1.0.1.bb 
+    # add "export SSH_AUTH_SOCK" without the quotes to build/conf/local.conf
     echo “1.1.1” > /tmp/BUILDMMU.txt
     source oe-init-build-env
 
