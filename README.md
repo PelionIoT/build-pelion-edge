@@ -28,7 +28,6 @@ These instructions should be run from within the Docker container started in the
     ... change assembleRoot to ${HOME}/workspace/wigwag-build-env/build/assemble
     ... change distrobutionRoot to ${HOME}/workspace/wigwag-build-env/build/distro
     ... save,quit
-    # FIX: in the wwbuilds folder, change all "log::cmd" to "log_cmd"
     cd Tyocto/thud/poky
     # add "export SSH_AUTH_SOCK" on its own line somewhere near the top of recipes that use oe_runnpm
         # recipes that use oe_runnpm in the do_compile() function need to be modified to allow usage of your sshagent because some of the dependencies listed in package.json are from private repos.
