@@ -18,7 +18,7 @@ define docker_run
 endef
 
 .PHONY: all
-all: Makefile .docker-image
+all: Makefile .docker-image conf
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
 .PHONY: bash
@@ -41,15 +41,26 @@ bitbake-%:
 
 .PHONY: clean
 clean: bitbake-clean
-	rm .docker-image
+	rm -f .docker-image
+
+.PHONY: conf
+conf: ${POKY}/build/conf/local.conf ${POKY}/build/conf/bblayers.conf
+
+${POKY}/build/conf/%: ${POKY}/meta-gateway-ww/conf/%.sample
+	rm -f ${POKY}/build/conf/$*
+	$(call docker_run, make bb/oe-init-build-env)
 
 ##
 ## The "bb" recipes are meant to be executed from within a Docker container
 ##
-.PHONY:bb/%
+.PHONY: bb/%
 bb/%:
 	source ${POKY}/oe-init-build-env ${POKY}/build; \
 	bitbake $*
+
+.PHONY: bb/oe-init-build-env
+bb/oe-init-build-env:
+	source ${POKY}/oe-init-build-env ${POKY}/build;
 
 .PHONY: bb/clean
 bb/clean:
