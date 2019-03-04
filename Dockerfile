@@ -80,5 +80,11 @@ RUN groupadd -g ${gid} ${group} \
 && sed -i 's/%sudo	ALL=(ALL:ALL) ALL/%sudo	ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 
 USER ${user}
+
+# accept the host key for github
+RUN mkdir ${HOME}/.ssh \
+&& chmod 700 ${HOME}/.ssh \
+&& ssh-keyscan -H github.com > ${HOME}/.ssh/known_hosts
+
 WORKDIR /home/${user}
 CMD /bin/bash
