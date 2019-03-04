@@ -18,7 +18,6 @@ reattach.
 ## Setup Build Environment
 These instructions should be run from within the Docker container started in the previous step.
 
-    ssh -T git@github.com
     mkdir build
     cd build
     bash <(curl -fsSLk https://code.wigwag.com/tools/sc/wwysetup.sh)
@@ -39,7 +38,3 @@ These instructions should be run from within the Docker container started in the
 ## Manual build with bitbake
     bitbake wwrelay-ng-wpackage
     # TBD assembly steps
-
-## Troubleshooting
-
-1.  Any time the docker container is rebuilt, you must run "ssh -T git@github.com" and accept the github server's pubkey before running bitbake again.
