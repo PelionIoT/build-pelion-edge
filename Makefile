@@ -9,6 +9,8 @@ define docker_run
 		-v ${POKY}:${HOME}/poky \
 		-v ${HOME}/.ssh:${HOME}/.ssh \
 		-v ${MAKEFILE}:${HOME}/Makefile \
+		-v $$(dirname $$SSH_AUTH_SOCK):$$(dirname $$SSH_AUTH_SOCK) \
+		-e SSH_AUTH_SOCK=$$SSH_AUTH_SOCK \
 		-e EDITOR=vim \
 		-e POKY=${HOME}/poky \
 		-e TEMPLATECONF=${HOME}/poky/meta-gateway-ww/conf \
