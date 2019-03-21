@@ -17,6 +17,16 @@ If you cloned the poky repo at a different location, or named the repo a differe
 
 ## Easy Instructions
 
+### Credentials
+   Two sets of credentials are needed for inclusion in the firware image. If they are present in this directory, the Makefile will copy them to the appropriate location for the yocto build.
+
+#### Pelion Development Credentials
+
+   Pelion Cloud development credentials are needed for Pelion Edge.  Provision your build with a Pelion Cloud developer certificate if you are building for [Pelion Cloud developer mode](https://cloud.mbed.com/docs/current/connecting/provisioning-development-devices.html).  Copy your Pelion Cloud credentials file to this directory.
+
+#### Upgrade CA Certificate
+   Authenticated upgrade requires inclusion of a cerificate authority certificate to be included in the initialization image.   This CA is used to issue the certificates included with an authenticated upgrade.  After obtaining your CA certificate, copy to the local file ./upgradeCA.cert.
+
 ### Full builds
 
     make
