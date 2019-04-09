@@ -21,7 +21,7 @@ If you cloned the poky repo at a different location, or named the repo a differe
 ## Easy Instructions
 
 ### Credentials
-   Two sets of credentials are needed for inclusion in the firware image. If they are present in this directory, the Makefile will copy them to the appropriate location for the yocto build.
+   Three sets of credentials are needed for inclusion in the firware image. If they are present in this directory, the Makefile will copy them to the appropriate location for the yocto build.
 
 #### Pelion Development Credentials
 
@@ -29,6 +29,10 @@ If you cloned the poky repo at a different location, or named the repo a differe
 
 #### Upgrade CA Certificate
    Authenticated upgrade requires inclusion of a cerificate authority certificate to be included in the initialization image.   This CA is used to issue the certificates included with an authenticated upgrade.  After obtaining your CA certificate, copy to the local file ./upgradeCA.cert.
+
+#### Firmware Update Manifest Credentials
+
+   If you enabled support for Pelion firmware updates in mbed-edge-core, copy your manifest certificate update_default_resources.c into `recipes-wigwag/mbed-edge-core/files/`.  Run manifest-tool to generate the certificate.  See the documentation on [getting the update resources](https://github.com/ARMmbed/mbed-edge/blob/master/README.md#getting-the-update-resources).
 
 ### Full builds
 
