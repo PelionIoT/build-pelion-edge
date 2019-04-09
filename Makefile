@@ -29,6 +29,7 @@ endef
 .PHONY: all
 all: Makefile .docker-image conf
 	cp ./mbed_cloud_dev_credentials.c ${POKY}/meta-gateway-ww/recipes-wigwag/mbed-edge-core/files/
+	cp ./update_default_resources.c ${POKY}/meta-gateway-ww/recipes-wigwag/mbed-edge-core/files/
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
 .PHONY: bash
