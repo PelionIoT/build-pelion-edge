@@ -1,11 +1,11 @@
-# Build environment for Wigwag gateway firmware
+# Build environment for Pelion OS Edge firmware
 
-This repo contains a set of instructions (this README) and some scripts for building the wigwag gateway firmware image.
+This repo contains a set of instructions (this README) and some scripts for building the Pelion OS Edge firmware image.
 
 The README assumes that the poky repo is cloned in the same directory as this repo.  For example:
 
     ~/build/
-        wigwag-build-env/
+        build-env/
         poky/
 
 If you cloned the poky repo at a different location, or named the repo a different name, you will need to modify the POKY variable in the Makefile or define the POKY in your shell environment.
@@ -39,11 +39,11 @@ Create a docker container using Dockerfile in this repo and run the container in
 
 ### Build the docker image
 
-    docker build -t wigwag-build-env_${USER} --build-arg user=${USER} --build-arg group=${USER} --build-arg uid=$(id -u) --build-arg gid=$(id -g) .
+    docker build -t pelion-build-env_${USER} --build-arg user=${USER} --build-arg group=${USER} --build-arg uid=$(id -u) --build-arg gid=$(id -g) .
 
 ### Run the docker image
 
-    docker run -it -v $HOME/workspace:$HOME/workspace -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -e EDITOR=vim --name wigwag-build-env_${USER} wigwag-build-env_${USER}
+    docker run -it -v $HOME/workspace:$HOME/workspace -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -e EDITOR=vim --name pelion-build-env_${USER} pelion-build-env_${USER}
 
 You might also want to run that inside of screen to be able to detach and
 reattach.
