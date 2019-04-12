@@ -20,7 +20,7 @@ define docker_run
 		-v ${MAKEFILE}:${HOME}/Makefile \
 		-e EDITOR=vim \
 		-e POKY=${HOME}/poky \
-		-e TEMPLATECONF=${HOME}/poky/meta-gateway-ww/conf \
+		-e TEMPLATECONF=${HOME}/poky/meta-pelion-os-edge/conf \
 		--rm \
 		${USER}/ww-build-env:latest \
 		$(1)
@@ -28,9 +28,9 @@ endef
 
 .PHONY: all
 all: Makefile .docker-image conf
-	cp ./mbed_cloud_dev_credentials.c ${POKY}/meta-gateway-ww/recipes-wigwag/mbed-edge-core/files/
-	cp ./upgradeCA.cert ${POKY}/meta-gateway-ww/recipes-core/ww-console-image-initramfs-init/files/
-	cp ./update_default_resources.c ${POKY}/meta-gateway-ww/recipes-wigwag/mbed-edge-core/files/
+	cp ./mbed_cloud_dev_credentials.c ${POKY}/meta-pelion-os-edge/recipes-wigwag/mbed-edge-core/files/
+	cp ./upgradeCA.cert ${POKY}/meta-pelion-os-edge/recipes-core/ww-console-image-initramfs-init/files/
+	cp ./update_default_resources.c ${POKY}/meta-pelion-os-edge/recipes-wigwag/mbed-edge-core/files/
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
 .PHONY: bash
@@ -58,7 +58,7 @@ clean: bitbake-clean
 .PHONY: conf
 conf: ${POKY}/build/conf/local.conf ${POKY}/build/conf/bblayers.conf
 
-${POKY}/build/conf/%: ${POKY}/meta-gateway-ww/conf/%.sample
+${POKY}/build/conf/%: ${POKY}/meta-pelion-os-edge/conf/%.sample
 	rm -f ${POKY}/build/conf/$*
 	$(call docker_run, make bb/oe-init-build-env)
 
