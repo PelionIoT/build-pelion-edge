@@ -1,7 +1,7 @@
-# Build environment for Pelion gateway firmware
+# Build environment for Pelion OS Edge firmware
 
-This repo contains a set of instructions (this README) and some scripts for building the Pelion gateway firmware image.
-When used in conjuction with the [Repo Manifest](https://github.com/ARMmbed/manifest-gateway-ww) repository, it automates the complete [Yocto build instructions](https://github.com/ARMmbed/meta-gateway-ww/blob/master/BUILD.md).
+This repo contains a set of instructions (this README) and some scripts for building the Pelion OS Edge firmware image.
+When used in conjuction with the [Repo Manifest](https://github.com/armpelionedge/manifest-pelion-os-edge) repository, it automates the complete [Yocto build instructions](https://github.com/armpelionedge/meta-pelion-os-edge/blob/master/BUILD.md).
 
 The README assumes that the poky repo is cloned in the same directory as this repo.  For example:
 
@@ -76,4 +76,4 @@ These instructions should be run from within the Docker container started in the
     bitbake console-image
 
 ## Flashing 
-Instructions for flashing the image to an SD card can be found [here](https://github.com/ARMmbed/meta-gateway-ww/blob/master/FLASH.md).
+Instructions for flashing the image to an SD card can be found [here](https://github.com/armpelionedge/meta-pelion-os-edge/blob/master/FLASH.md).
