@@ -107,6 +107,10 @@ RUN dpkg --add-architecture i386 \
 		libcrypto++-dev:i386 \
 		zlib1g-dev:i386
 
+# additional build utilities
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        u-boot-tools
+
 # if we're building a jenkins agent, we must also install openjdk
 # and an ssh server so the master can log in
 ARG mode
