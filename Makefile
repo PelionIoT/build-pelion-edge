@@ -33,7 +33,7 @@ all: Makefile .docker-image conf
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
 .PHONY: bash
-bash:
+bash: .docker-image
 	$(call docker_run, /bin/bash)
 
 .docker-image: ${DOCKERFILE}
