@@ -111,6 +111,17 @@ RUN dpkg --add-architecture i386 \
 RUN apt-get update && apt-get install -y --no-install-recommends \
         u-boot-tools
 
+# additional packages required by the upgrade diff tool
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        coreutils \
+        grep \
+        gzip \
+        mount \
+        openssl \
+        tar \
+        util-linux \
+        xz-utils
+
 # if we're building a jenkins agent, we must also install openjdk
 # and an ssh server so the master can log in
 ARG mode
