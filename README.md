@@ -76,4 +76,4 @@ These instructions should be run from within the Docker container started in the
     bitbake console-image
 
 ## Flashing 
-Instructions for flashing the image to an SD card can be found [here](https://github.com/armpelionedge/meta-pelion-os-edge/blob/master/FLASH.md).
+Instructions for flashing the image to an SD card can be found [here](https://github.com/armpelionedge/meta-pelion-edge/blob/master/FLASH.md).
