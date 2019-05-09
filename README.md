@@ -1,4 +1,4 @@
-# Build environment for Pelion OS Edge firmware
+# Build environment for Pelion Edge firmware
 
 This repo contains a set of instructions (this README) and some scripts for building the Pelion OS Edge firmware image.
 
