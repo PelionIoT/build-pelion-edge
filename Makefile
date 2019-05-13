@@ -16,6 +16,7 @@ define docker_run
 		--device /dev/loop7:/dev/loop7 \
 		-it \
 		-v ${POKY}:${HOME}/poky \
+		-v ~/work:${HOME}/work \
 		-v ${HOME}/.ssh:${HOME}/.ssh \
 		-v ${MAKEFILE}:${HOME}/Makefile \
 		-e EDITOR=vim \
@@ -78,3 +79,7 @@ bb/oe-init-build-env:
 bb/clean:
 	source ${POKY}/oe-init-build-env ${POKY}/build; \
 	bitbake -c clean ${IMAGE_RECIPE}
+
+bb/clean-%:
+	source ${POKY}/oe-init-build-env ${POKY}/build; \
+	bitbake -c clean $*
