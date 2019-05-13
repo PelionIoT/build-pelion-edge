@@ -28,9 +28,25 @@ endef
 
 .PHONY: all
 all: Makefile .docker-image conf
-	cp ./mbed_cloud_dev_credentials.c ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/
-	cp ./upgradeCA.cert ${POKY}/meta-pelion-edge/recipes-core/ww-console-image-initramfs-init/files/
-	cp ./update_default_resources.c ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/
+	if [ -e ./mbed_cloud_dev_credentials.c ]; then \
+		cp ./mbed_cloud_dev_credentials.c  ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
+	fi
+	if [ -e ./upgradeCA.cert ]; then \
+		cp ./upgradeCA.cert ${POKY}/meta-pelion-edge/recipes-core/ww-console-image-initramfs-init/files/; \
+	fi
+	if [ -e ./update_default_resources.c ]; then \
+		cp ./update_default_resources.c ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
+	fi
+	if [ -e ./rot_key.pem ]; then \
+		mkdir -p ${POKY}/meta-pelion-edge/recipes-bsp/atf/files/; \
+		cp ./rot_key.pem ${POKY}/meta-pelion-edge/recipes-bsp/atf/files/; \
+	fi
+	if [ -e ./mbl-fit-rot-key.crt ]; then \
+		cp ./mbl-fit-rot-key.crt ${POKY}/build/; \
+	fi
+	if [ -e ./mbl-fit-rot-key.key ]; then \
+		cp ./mbl-fit-rot-key.key ${POKY}/build/; \
+	fi
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
 .PHONY: bash
