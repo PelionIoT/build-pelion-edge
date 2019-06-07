@@ -1,4 +1,5 @@
 DOCKERFILE:=Dockerfile
+MACHINE:=raspberrypi3
 POKY?=$(abspath ../poky)
 MAKEFILE:=$(realpath $(lastword $(MAKEFILE_LIST)))
 IMAGE_RECIPE:=console-image
@@ -48,6 +49,16 @@ all: Makefile .docker-image conf
 		cp ./mbl-fit-rot-key.key ${POKY}/build/; \
 	fi
 	$(call docker_run, make bb/${IMAGE_RECIPE})
+
+flash-%: all
+	$(foreach dev, $(wildcard /dev/${*}*),\
+		sudo umount ${dev} || true; \
+	)
+	sudo bmaptool copy \
+		--bmap ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
+		${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
+		/dev/$*
+	sudo eject /dev/$*
 
 .PHONY: bash
 bash: .docker-image
