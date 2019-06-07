@@ -65,7 +65,7 @@ bash: .docker-image
 	touch $@
 
 bitbake-%:
-	$(call docker_run, make bb/$*)
+	$(call docker_run, make "bb/$*")
 
 .PHONY: clean
 clean: bitbake-clean
