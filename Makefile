@@ -54,10 +54,16 @@ flash-%: all
 	$(foreach dev, $(wildcard /dev/${*}*),\
 		sudo umount ${dev} || true; \
 	)
-	sudo bmaptool copy \
-		--bmap ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
-		${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
-		/dev/$*
+	if which bmaptool ; then\
+		sudo bmaptool copy \
+			--bmap ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
+			${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
+			/dev/$* ;\
+	else \
+		gunzip -c  ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz |\
+			pv |\
+			sudo dd of=/dev/$* bs=4M  iflag=fullblock oflag=direct conv=fsync ;\
+	fi
 	sudo eject /dev/$*
 
 .PHONY: bash
