@@ -1,4 +1,5 @@
 DOCKERFILE:=Dockerfile
+MACHINE:=raspberrypi3
 POKY?=$(abspath ../poky)
 MAKEFILE:=$(realpath $(lastword $(MAKEFILE_LIST)))
 IMAGE_RECIPE:=console-image
@@ -49,6 +50,22 @@ all: Makefile .docker-image conf
 	fi
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
+flash-%: all
+	$(foreach dev, $(wildcard /dev/${*}*),\
+		sudo umount ${dev} || true; \
+	)
+	if which bmaptool ; then\
+		sudo bmaptool copy \
+			--bmap ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
+			${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
+			/dev/$* ;\
+	else \
+		gunzip -c  ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz |\
+			pv |\
+			sudo dd of=/dev/$* bs=4M  iflag=fullblock oflag=direct conv=fsync ;\
+	fi
+	sudo eject /dev/$*
+
 .PHONY: bash
 bash: .docker-image
 	$(call docker_run, /bin/bash)
@@ -65,7 +82,7 @@ bash: .docker-image
 	touch $@
 
 bitbake-%:
-	$(call docker_run, make bb/$*)
+	$(call docker_run, make "bb/$*")
 
 .PHONY: clean
 clean: bitbake-clean
