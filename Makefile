@@ -1,5 +1,5 @@
 DOCKERFILE:=Dockerfile
-MACHINE:=raspberrypi3
+MACHINE:=raspberrypi3-mbl
 POKY?=$(abspath ../poky)
 MAKEFILE:=$(realpath $(lastword $(MAKEFILE_LIST)))
 IMAGE_RECIPE:=console-image
@@ -56,11 +56,11 @@ flash-%: all
 	)
 	if which bmaptool ; then\
 		sudo bmaptool copy \
-			--bmap ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
-			${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
+			--bmap ${POKY}/build/tmp-glibc/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
+			${POKY}/build/tmp-glibc/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
 			/dev/$* ;\
 	else \
-		gunzip -c  ${POKY}/build/tmp/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz |\
+		gunzip -c  ${POKY}/build/tmp-glibc/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz |\
 			pv |\
 			sudo dd of=/dev/$* bs=4M  iflag=fullblock oflag=direct conv=fsync ;\
 	fi
