@@ -29,32 +29,32 @@ endef
 
 .PHONY: all
 all: Makefile .docker-image conf
-	if [ -e ./mbed_cloud_dev_credentials.c ]; then \
+	@if [ -e ./mbed_cloud_dev_credentials.c ]; then \
 		cp ./mbed_cloud_dev_credentials.c  ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
 	fi
-	if [ -e ./upgradeCA.cert ]; then \
+	@if [ -e ./upgradeCA.cert ]; then \
 		cp ./upgradeCA.cert ${POKY}/meta-pelion-edge/recipes-core/ww-console-image-initramfs-init/files/; \
 	fi
-	if [ -e ./update_default_resources.c ]; then \
+	@if [ -e ./update_default_resources.c ]; then \
 		cp ./update_default_resources.c ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
 	fi
-	if [ -e ./rot_key.pem ]; then \
+	@if [ -e ./rot_key.pem ]; then \
 		mkdir -p ${POKY}/meta-pelion-edge/recipes-bsp/atf/files/; \
 		cp ./rot_key.pem ${POKY}/meta-pelion-edge/recipes-bsp/atf/files/; \
 	fi
-	if [ -e ./mbl-fit-rot-key.crt ]; then \
+	@if [ -e ./mbl-fit-rot-key.crt ]; then \
 		cp ./mbl-fit-rot-key.crt ${POKY}/build/; \
 	fi
-	if [ -e ./mbl-fit-rot-key.key ]; then \
+	@if [ -e ./mbl-fit-rot-key.key ]; then \
 		cp ./mbl-fit-rot-key.key ${POKY}/build/; \
 	fi
-	$(call docker_run, make bb/${IMAGE_RECIPE})
+	@$(call docker_run, make bb/${IMAGE_RECIPE})
 
 flash-%: all
-	$(foreach dev, $(wildcard /dev/${*}*),\
+	@$(foreach dev, $(wildcard /dev/${*}*),\
 		sudo umount ${dev} || true; \
 	)
-	if which bmaptool ; then\
+	@if which bmaptool > /dev/null ; then\
 		sudo bmaptool copy \
 			--bmap ${POKY}/build/tmp-glibc/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.bmap\
 			${POKY}/build/tmp-glibc/deploy/images/${MACHINE}/${IMAGE_RECIPE}-${MACHINE}.wic.gz\
@@ -64,14 +64,14 @@ flash-%: all
 			pv |\
 			sudo dd of=/dev/$* bs=4M  iflag=fullblock oflag=direct conv=fsync ;\
 	fi
-	sudo eject /dev/$*
+	@sudo eject /dev/$*
 
 .PHONY: bash
 bash: .docker-image
 	$(call docker_run, /bin/bash)
 
 .docker-image: ${DOCKERFILE}
-	docker build \
+	@docker build \
 		--tag ${USER}/ww-build-env:$(shell git describe --dirty --always --tags) \
 		--tag ${USER}/ww-build-env:latest \
 		--build-arg user=${USER} \
@@ -100,14 +100,14 @@ ${POKY}/build/conf/%: ${POKY}/meta-pelion-edge/conf/%.sample
 ##
 .PHONY: bb/%
 bb/%:
-	source ${POKY}/oe-init-build-env ${POKY}/build; \
+	@source ${POKY}/oe-init-build-env ${POKY}/build; \
 	bitbake $*
 
 .PHONY: bb/oe-init-build-env
 bb/oe-init-build-env:
-	source ${POKY}/oe-init-build-env ${POKY}/build;
+	@source ${POKY}/oe-init-build-env ${POKY}/build;
 
 .PHONY: bb/clean
 bb/clean:
-	source ${POKY}/oe-init-build-env ${POKY}/build; \
+	@source ${POKY}/oe-init-build-env ${POKY}/build; \
 	bitbake -c clean ${IMAGE_RECIPE}
