@@ -22,7 +22,8 @@ If you cloned the poky repo at a different location, or named the repo a differe
 
 ### Credentials
    Several sets of credentials are needed to build the firware image. If they are present in this directory, the Makefile will copy them to the appropriate location for the yocto build.  Please consult the [Yocto build instructions](https://github.com/armpelionedge/meta-pelion-edge/blob/dev/BUILD.md) for more information about these credentials.
-
+	
+	build-env/
 	* mbed_cloud_dev_credentials.c
 	* upgradeCA.cert
 	* update_default_resources.c
