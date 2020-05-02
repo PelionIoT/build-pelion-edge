@@ -25,11 +25,7 @@ If you cloned the poky repo at a different location, or named the repo a differe
 	
 	build-env/
 	* mbed_cloud_dev_credentials.c
-	* upgradeCA.cert
 	* update_default_resources.c
-	* rot_key.pem
-	* mbl-fit-rot-key.cert
-	* mbl-fit-rot-key.key
 
 ### Full builds
 
