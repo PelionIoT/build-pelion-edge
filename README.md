@@ -1,7 +1,7 @@
-# Build environment for Pelion OS Edge firmware
+# Build environment for Pelion Edge firmware
 
-This repo contains a set of instructions (this README) and some scripts for building the Pelion OS Edge firmware image.
-When used in conjuction with the [Repo Manifest](https://github.com/armpelionedge/manifest-pelion-os-edge) repository, it automates the complete [Yocto build instructions](https://github.com/armpelionedge/meta-pelion-edge/blob/dev/BUILD.md).
+This repo contains a set of instructions (this README) and some scripts for building the Pelion Edge firmware image.
+When used in conjuction with the [Repo Manifest](https://github.com/armpelionedge/manifest-pelion-edge) repository, it automates the complete [Yocto build instructions](https://github.com/armpelionedge/meta-pelion-edge/blob/dev/BUILD.md).
 
 The README assumes that the poky repo is cloned in the same directory as this repo.  For example:
 
