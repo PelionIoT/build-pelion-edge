@@ -6,6 +6,15 @@ FROM ubuntu:18.04
 #	-d # daemonize
 #	-u root:root # run as root for permission to start sshd in the container
 #	-p 2222:22 # map host port 2222 to container port 22 for sshd
+#	--privileged=true # needed for mount/umount operations inside Jenkins jobs
+#	--device /dev/loop0:/dev/loop0 # Map loopback devices so they can be
+#	--device /dev/loop1:/dev/loop1 # used by jobs (e.g. the build diff job)
+#	--device /dev/loop2:/dev/loop2 # to mount partitions in image files.
+#	--device /dev/loop3:/dev/loop3 # We mount as many as we can because
+#	--device /dev/loop4:/dev/loop4 # they are shared across the entire host
+#	--device /dev/loop5:/dev/loop5 # so this maximizes the chances to find
+#	--device /dev/loop6:/dev/loop6 # a free loopback device even when there
+#	--device /dev/loop7:/dev/loop7 # are other builds/jobs running.
 #	-v jenkins-data:/home/jenkins # persistent jenkins storage on the host is mapped to $HOME
 #	 <image-name>:latest # the name of the image produced by this Dockerfile
 #	 /usr/sbin/sshd -D # start sshd
@@ -106,6 +115,21 @@ RUN dpkg --add-architecture i386 \
 		libssl-dev:i386 \
 		libcrypto++-dev:i386 \
 		zlib1g-dev:i386
+
+# additional build utilities
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        u-boot-tools
+
+# additional packages required by the upgrade diff tool
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        coreutils \
+        grep \
+        gzip \
+        mount \
+        openssl \
+        tar \
+        util-linux \
+        xz-utils
 
 # if we're building a jenkins agent, we must also install openjdk
 # and an ssh server so the master can log in
