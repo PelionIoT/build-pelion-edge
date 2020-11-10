@@ -30,10 +30,10 @@ endef
 .PHONY: all
 all: Makefile .docker-image conf
 	if [ -e ./mbed_cloud_dev_credentials.c ]; then \
-		cp ./mbed_cloud_dev_credentials.c  ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
+		cp ./mbed_cloud_dev_credentials.c  ${POKY}/meta-mbed-edge/recipes-connectivity/mbed-edge-core/files/; \
 	fi
 	if [ -e ./update_default_resources.c ]; then \
-		cp ./update_default_resources.c ${POKY}/meta-pelion-edge/recipes-wigwag/mbed-edge-core/files/; \
+		cp ./update_default_resources.c ${POKY}/meta-mbed-edge/recipes-connectivity/mbed-edge-core/files/; \
 	fi
 	$(call docker_run, make bb/${IMAGE_RECIPE})
 
