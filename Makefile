@@ -76,7 +76,7 @@ clean: bitbake-clean
 	rm -f .docker-image
 
 .PHONY: conf
-conf: ${POKY}/build/conf/local.conf ${POKY}/build/conf/bblayers.conf
+conf: .docker-image ${POKY}/build/conf/local.conf ${POKY}/build/conf/bblayers.conf
 
 ${POKY}/build/conf/%: ${POKY}/meta-pelion-edge/conf/%.sample
 	rm -f ${POKY}/build/conf/$*
