@@ -78,7 +78,7 @@ clean: bitbake-clean
 .PHONY: conf
 conf: ${POKY}/build/conf/local.conf ${POKY}/build/conf/bblayers.conf
 
-${POKY}/build/conf/%: ${POKY}/meta-pelion-edge/conf/%.sample
+${POKY}/build/conf/%: .docker-image ${POKY}/meta-pelion-edge/conf/%.sample
 	rm -f ${POKY}/build/conf/$*
 	$(call docker_run, make bb/oe-init-build-env)
 
